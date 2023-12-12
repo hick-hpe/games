@@ -1,11 +1,27 @@
 let canvas = document.getElementById("canvas");
 let ctx = canvas.getContext("2d");
+
 let aparencia = 2
+let escala = 7
 
 let imagemSprite = new Image();
 imagemSprite.src = "img/sprites_player/sprites (2).png";
 
+imagemSprite.src = "img/sprites_player/sprites (" + aparencia + ").png";
+
 const player = {
+    x: 50,
+    y: 300,
+    width: 48,
+    height: 48,
+    speed: 3,
+    movingUp: false,
+    movingDown: false,
+    movingLeft: false,
+    movingRight: false,
+};
+
+const arvore = {
     x: 50,
     y: 300,
     width: 48,
@@ -54,7 +70,7 @@ function draw() {
     // Limpa o canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    imagemSprite.src = "img/sprites_player/sprites (" + aparencia + ").png";
+    
     ctx.drawImage(
         imagemSprite, 0, 0, player.width, player.height,
         player.x, player.y, player.width, player.height
@@ -62,7 +78,14 @@ function draw() {
 
     let imagemArvore = new Image()
     imagemArvore.src = "img/tree.png"
-    let escala = 7
+    
+    // desenhando o player
+    imagemSprite.src = "img/sprites_player/sprites ("+aparencia+").png"
+    ctx.drawImage(
+        imagemSprite,
+        player.x, player.y, player.width, player.height,
+        player.x, player.y, player.width, player.height,
+    )
 
     // desenhando as arvores
     ctx.drawImage(
@@ -88,7 +111,7 @@ function draw() {
 function soltouTecla(event) {
 
     if (event.key === 'ArrowUp') {
-        // aparencia = 11
+        aparencia = 11
         player.movingUp = false;
     }
 
@@ -98,12 +121,12 @@ function soltouTecla(event) {
     }
 
     if (event.key === 'ArrowRight') {
-        // aparencia = 8
+        aparencia = 8
         player.movingRight = false;
     }
 
     if (event.key === 'ArrowLeft') {
-        // aparencia = 5
+        aparencia = 5
         player.movingLeft = false;
     }
 
