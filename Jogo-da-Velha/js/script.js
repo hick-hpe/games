@@ -1,3 +1,5 @@
+console.log("Opcao: "+localStorage.getItem('opcao'))
+
 let canvas = document.querySelector('canvas')
 let contexto = canvas.getContext('2d');
 let ladoQuadrado = canvas.width

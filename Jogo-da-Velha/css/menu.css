@@ -1,0 +1,68 @@
+* {
+    margin: 0;
+    font-family: cursive;
+}
+
+body {
+    background-color: #FFF7D4;
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    place-items: center;
+}
+
+h1,
+.opcao {
+    text-align: center;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+}
+
+.opcao {
+    display: grid;
+    place-items: center;
+    width: 250px;
+    height: 100px;
+    margin: 20px 0;
+}
+
+.maquina:not(hover) {
+    background-color: red;
+    border: 5px solid #7a0808;
+    color: #fff;
+    transition: .5s;
+}
+
+.dois-jogadores:not(hover) {
+    background-color: blue;
+    border: 5px solid rgb(5, 5, 114);
+    color: #fff;
+    transition: .5s;
+}
+
+.conteudo-opcao {
+    display: flex;
+    justify-content: center;
+}
+
+.vs {
+    display: flex;
+    align-items: center;
+}
+
+.maquina, .dois-jogadores {
+    border-radius: 30px;
+}
+
+.maquina:hover {
+    transform: scale(1.1);
+    transition: .5s;
+}
+
+.dois-jogadores:hover {
+    transform: scale(1.1);
+    transition: .5s;
+}
