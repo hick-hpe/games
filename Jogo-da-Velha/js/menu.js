@@ -9,5 +9,5 @@ contraMaquina.onclick = () => {
 
 contraPlayer.onclick = () => {
     localStorage.setItem('opcao', 'player')
-    window.open('index.html')
+    window.location.href = 'index.html'
 }
