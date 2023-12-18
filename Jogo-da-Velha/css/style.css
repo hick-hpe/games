@@ -1,0 +1,33 @@
+* {
+    font-family: cursive;
+}
+
+body {
+    background-color: FFF7D4;
+}
+
+canvas {
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+body {
+    display: grid;
+    place-items: center;
+}
+
+h1, .rodape, .button {
+    text-align: center;
+}
+
+button {
+    background-color: #9BB8CD;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 10px;
+    border: 0;
+}
+
+button:hover {
+    border: 1px solid #000;
+}
