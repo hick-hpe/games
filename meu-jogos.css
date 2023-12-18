@@ -7,7 +7,6 @@
 
 html {
     width: 100vw;
-
 }
 
 body {
@@ -24,7 +23,7 @@ header {
 }
 
 .container {
-    margin-left: 50px;
+    margin-left: 20px;
     display: flex;
     flex-wrap: wrap;
 }
