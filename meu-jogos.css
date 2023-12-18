@@ -19,6 +19,7 @@ header {
 .container {
     margin-left: 50px;
     display: flex;
+    flex-wrap: wrap;
 }
 
 .item {
