@@ -1,7 +1,5 @@
 let canvas = document.querySelector('canvas')
 let contexto = canvas.getContext('2d');
-
-// dimensões do canvas  
 let ladoQuadrado = canvas.width
 canvas.height = canvas.width
 let vezDoJogador = decideQuemComeca()
@@ -10,38 +8,26 @@ imagemSimbolo.src = vezDoJogador == "X" ? "img/simbolo_X.png" : "img/simbolo_O.p
 let tabela = [
     '', '', '', '', '', '', '', '', '',
 ]
+let cor = 'black'
+
+function desenharLinha(cor, x0, y0, x, y) {
+    contexto.lineWidth = 5;
+    contexto.strokeStyle = cor;
+
+    contexto.beginPath();
+    contexto.moveTo(x0, y0);
+    contexto.lineTo(x, y);
+    contexto.stroke();
+}
 
 function criarAsLinhasDivisorias() {
 
-    // Defina as propriedades da linha
-    contexto.lineWidth = 5; // largura da linha
-    contexto.strokeStyle = 'black'; // cor da linha
-
     // Desenhe uma linha
-    contexto.beginPath();
-    contexto.moveTo(ladoQuadrado / 3, 0); // mova para o ponto inicial (x, y)
-    contexto.lineTo(ladoQuadrado / 3, ladoQuadrado); // desenhe até o ponto final (x, y)
-    contexto.stroke(); // aplique o desenho
+    desenharLinha(cor, ladoQuadrado / 3, 0, ladoQuadrado / 3, ladoQuadrado);
+    desenharLinha(cor, ladoQuadrado * 2 / 3, 0, ladoQuadrado * 2 / 3, ladoQuadrado);
+    desenharLinha(cor, 0, ladoQuadrado / 3, ladoQuadrado, ladoQuadrado / 3);
+    desenharLinha(cor, 0, ladoQuadrado * 2 / 3, ladoQuadrado, ladoQuadrado * 2 / 3);
 
-    // Desenhe uma linha
-    contexto.beginPath();
-    contexto.moveTo(ladoQuadrado * 2 / 3, 0); // mova para o ponto inicial (x, y)
-    contexto.lineTo(ladoQuadrado * 2 / 3, ladoQuadrado); // desenhe até o ponto final (x, y)
-    contexto.stroke(); // aplique o desenho
-
-    // desenhar as linhas horizontais =======================================
-
-    // Desenhe uma linha
-    contexto.beginPath();
-    contexto.moveTo(0, ladoQuadrado / 3); // mova para o ponto inicial (x, y)
-    contexto.lineTo(ladoQuadrado, ladoQuadrado / 3); // desenhe até o ponto final (x, y)
-    contexto.stroke(); // aplique o desenho
-
-    // Desenhe uma linha
-    contexto.beginPath();
-    contexto.moveTo(0, ladoQuadrado * 2 / 3); // mova para o ponto inicial (x, y)
-    contexto.lineTo(ladoQuadrado, ladoQuadrado * 2 / 3); // desenhe até o ponto final (x, y)
-    contexto.stroke(); // aplique o desenho
 }
 
 function decideQuemComeca() {
@@ -177,62 +163,32 @@ function desenharVitoria(lista, ondeVenceu) {
         if (ondeVenceu == "linha") {
             // linha
             if (lista[1] == 0) {
-                contexto.beginPath();
-                contexto.moveTo(ladoQuadrado / 10, ladoQuadrado / 6);
-                contexto.lineTo(ladoQuadrado * 9 / 10, ladoQuadrado / 6);
-                contexto.strokeStyle = '#FF0000';
-                contexto.stroke();
+                desenharLinha('#FF0000', ladoQuadrado / 10, ladoQuadrado / 6, ladoQuadrado * 9 / 10, ladoQuadrado / 6);
             } else if (lista[1] == 1) {
-                contexto.beginPath();
-                contexto.moveTo(ladoQuadrado / 10, ladoQuadrado / 2);
-                contexto.lineTo(ladoQuadrado * 9 / 10, ladoQuadrado / 2);
-                contexto.strokeStyle = '#FF0000';
-                contexto.stroke();
+                desenharLinha('#FF0000', ladoQuadrado / 10, ladoQuadrado / 2, ladoQuadrado * 9 / 10, ladoQuadrado / 2);
             } else {
-                contexto.beginPath();
-                contexto.moveTo(ladoQuadrado / 10, ladoQuadrado * 5 / 6);
-                contexto.lineTo(ladoQuadrado * 9 / 10, ladoQuadrado * 5 / 6);
-                contexto.strokeStyle = '#FF0000';
-                contexto.stroke();
+                desenharLinha('#FF0000', ladoQuadrado / 10, ladoQuadrado * 5 / 6, ladoQuadrado * 9 / 10, ladoQuadrado * 5 / 6);
             }
         } else {
             // coluna
             if (lista[1] == 0) {
-                contexto.beginPath();
-                contexto.moveTo(ladoQuadrado / 6, ladoQuadrado / 10);
-                contexto.lineTo(ladoQuadrado / 6, ladoQuadrado * 9 / 10);
-                contexto.strokeStyle = '#FF0000';
-                contexto.stroke();
+                desenharLinha('#FF0000', ladoQuadrado / 6, ladoQuadrado / 10, ladoQuadrado / 6, ladoQuadrado * 9 / 10);
             } else if (lista[1] == 1) {
-                contexto.beginPath();
-                contexto.moveTo(ladoQuadrado / 2, ladoQuadrado / 10);
-                contexto.lineTo(ladoQuadrado / 2, ladoQuadrado * 9 / 10);
-                contexto.strokeStyle = '#FF0000';
-                contexto.stroke();
+                desenharLinha('#FF0000', ladoQuadrado / 2, ladoQuadrado / 10, ladoQuadrado / 2, ladoQuadrado * 9 / 10);
             } else {
-                contexto.beginPath();
-                contexto.moveTo(ladoQuadrado * 5 / 6, ladoQuadrado / 10);
-                contexto.lineTo(ladoQuadrado * 5 / 6, ladoQuadrado * 9 / 10);
-                contexto.strokeStyle = '#FF0000';
-                contexto.stroke();
+                desenharLinha('#FF0000', ladoQuadrado * 5 / 6, ladoQuadrado / 10, ladoQuadrado * 5 / 6, ladoQuadrado * 9 / 10);
             }
         }
     } else {
         if (ondeVenceu == "diagonalP") {
-            contexto.beginPath();
-            contexto.moveTo(ladoQuadrado / 10, ladoQuadrado / 10);
-            contexto.lineTo(ladoQuadrado * 9 / 10, ladoQuadrado * 9 / 10);
-            contexto.strokeStyle = '#FF0000';
-            contexto.stroke();
+            desenharLinha('#FF0000', ladoQuadrado / 10, ladoQuadrado / 10, ladoQuadrado * 9 / 10, ladoQuadrado * 9 / 10);
         } else {
-            contexto.beginPath();
-            contexto.moveTo(ladoQuadrado * 9 / 10, ladoQuadrado / 10);
-            contexto.lineTo(ladoQuadrado / 10, ladoQuadrado * 9 / 10);
-            contexto.strokeStyle = '#FF0000';
-            contexto.stroke();
+            desenharLinha('#FF0000', ladoQuadrado * 9 / 10, ladoQuadrado / 10, ladoQuadrado / 10, ladoQuadrado * 9 / 10);
         }
     }
     canvas.removeEventListener('click', cliqueNocanvas)
+    vezDoJogador = vezDoJogador == "X" ? "O" : "X"
+    document.querySelector('span').textContent = "Jogador " + vezDoJogador + " venceu!!!"
 }
 
 function cliqueNocanvas(event) {
