@@ -5,6 +5,11 @@
     font-family: cursive;
 }
 
+html {
+    width: 100vw;
+
+}
+
 body {
     background-color: #9BB8CD;
     width: 100vw;
