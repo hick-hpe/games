@@ -136,7 +136,7 @@ let pacman = {
 
 // ghost
 class Ghost {
-    constructor(x, y, color) {
+    constructor(x, y, color, dir) {
         this.x = x + RADIUS / 8;
         this.y = y + RADIUS / 8;
         this.xHitBox = x;
@@ -146,10 +146,9 @@ class Ghost {
         this.speed = 2;
         this.isMoving = false;
         this.endMove = true;
-        this.direction = 3;
+        this.direction = dir; // fix this
         this.stop = false;
         this.paths = [];
-        this.intersections = 0;
     }
 
     draw() {
@@ -220,20 +219,25 @@ class Ghost {
     move() {
         if (!this.stop) {
             if (this.endMove) {
-                this.paths = this.getPaths(); // Checa as direções possíveis
-                // se a ultima posicao estiver na lista, retira, se nao tiver caminhos, colocar o oposto
-                // se for 1, 2
-                // se for 3, 4
+                log("---------------------------");
+                // this.paths = this.getPaths();
+                log("RECEIVED PATHS: ["+this.paths+"]");
                 const AGAINST = {
                     1: 2,
                     2: 1,
                     3: 4,
                     4: 3
                 }
-                this.paths = this.paths.filter(path => path != AGAINST[this.direction]);
-                if (this.paths.length == 0) this.paths = [AGAINST[this.direction]];
-                this.direction = this.paths[Math.floor(Math.random() * this.paths.length)]; // Escolhe uma nova direção aleatória
-                log(this.paths);
+                if (this.paths.length == 0) {
+                    this.paths = [AGAINST[this.direction]];
+                    log("YEZI");
+                }
+                log("BEFORE THIS: [" + this.paths + "]");
+                log("this.direction: "+this.direction)
+                // log("AGAINST "+ this.direction + ": " + AGAINST[this.direction]);
+                // this.paths = this.paths.filter(path => path != AGAINST[this.direction]);
+                this.direction = this.paths[Math.floor(Math.random() * this.paths.length)];
+                log("THIS: [" + this.paths + "]");
                 this.endMove = false;
             }
 
@@ -281,6 +285,12 @@ class Ghost {
         // Checa se o fantasma está alinhado em um bloco
         if (this.isAlignedBox()) {
             const WALL = 1;
+            const AGAINST = {
+                1: 2,
+                2: 1,
+                3: 4,
+                4: 3
+            }
             let x = Math.floor(this.xHitBox / BLOCK_SIZE);
             let y = Math.floor(this.yHitBox / BLOCK_SIZE);
 
@@ -295,8 +305,8 @@ class Ghost {
                         this.direction = 1;
                     } else {
                         this.paths = this.getPaths();
-                        //this.paths = this.paths.filter(path => path != AGAINST[this.direction]);
-                        log(this.paths);
+                        this.paths = this.paths.filter(path => path != AGAINST[this.direction]);
+                        // log(this.paths);
                         //this.stop = true;
                         this.endMove = true;
                     }
@@ -306,8 +316,8 @@ class Ghost {
                         this.direction = 2;
                     } else {
                         this.paths = this.getPaths();
-                        //this.paths = this.paths.filter(path => path != AGAINST[this.direction]);
-                        log(this.paths);
+                        this.paths = this.paths.filter(path => path != AGAINST[this.direction]);
+                        // log(this.paths);
                         //this.stop = true;
                         this.endMove = true;
                     }
@@ -317,8 +327,8 @@ class Ghost {
                         this.direction = 3;
                     } else {
                         this.paths = this.getPaths();
-                        //this.paths = this.paths.filter(path => path != AGAINST[this.direction]);
-                        log(this.paths);
+                        this.paths = this.paths.filter(path => path != AGAINST[this.direction]);
+                        // log(this.paths);
                         //this.stop = true;
                         this.endMove = true;
                     }
@@ -328,8 +338,8 @@ class Ghost {
                         this.direction = 4;
                     } else {
                         this.paths = this.getPaths();
-                        //this.paths = this.paths.filter(path => path != AGAINST[this.direction]);
-                        log(this.paths);
+                        this.paths = this.paths.filter(path => path != AGAINST[this.direction]);
+                        // log(this.paths);
                         //this.stop = true;
                         this.endMove = true;
                     }
@@ -346,10 +356,10 @@ function log(message) {
 
 
 let ghosts = [
-    new Ghost(BLOCK_SIZE * 9, BLOCK_SIZE * 8, 'red'),
-    new Ghost(BLOCK_SIZE * 8, BLOCK_SIZE * 9, 'green'),
-    new Ghost(BLOCK_SIZE * 9, BLOCK_SIZE * 9, 'purple'),
-    new Ghost(BLOCK_SIZE * 10, BLOCK_SIZE * 9, 'orange'),
+    new Ghost(BLOCK_SIZE * 9, BLOCK_SIZE * 8, 'red', 4),
+    new Ghost(BLOCK_SIZE * 8, BLOCK_SIZE * 9, 'green', 1),
+    new Ghost(BLOCK_SIZE * 9, BLOCK_SIZE * 9, 'purple', 4),
+    new Ghost(BLOCK_SIZE * 10, BLOCK_SIZE * 9, 'orange', 2),
 ];
 
 function positionIsWall(xP, yP) {
