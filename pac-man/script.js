@@ -231,6 +231,7 @@ class Ghost {
                     4: 3
                 }
                 this.paths = this.paths.filter(path => path != AGAINST[this.direction]);
+                if (this.paths.length == 0) this.paths = [AGAINST[this.direction]];
                 this.direction = this.paths[Math.floor(Math.random() * this.paths.length)]; // Escolhe uma nova direção aleatória
                 log(this.paths);
                 this.endMove = false;
@@ -345,10 +346,10 @@ function log(message) {
 
 
 let ghosts = [
-    new Ghost(BLOCK_SIZE * 9, BLOCK_SIZE * 11, 'red'),
-    // new Ghost(BLOCK_SIZE * 8, BLOCK_SIZE * 9, 'green'),
-    // new Ghost(BLOCK_SIZE * 9, BLOCK_SIZE * 9, 'purple'),
-    // new Ghost(BLOCK_SIZE * 10, BLOCK_SIZE * 9, 'orange'),
+    new Ghost(BLOCK_SIZE * 9, BLOCK_SIZE * 8, 'red'),
+    new Ghost(BLOCK_SIZE * 8, BLOCK_SIZE * 9, 'green'),
+    new Ghost(BLOCK_SIZE * 9, BLOCK_SIZE * 9, 'purple'),
+    new Ghost(BLOCK_SIZE * 10, BLOCK_SIZE * 9, 'orange'),
 ];
 
 function positionIsWall(xP, yP) {
